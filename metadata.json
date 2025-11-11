@@ -1,0 +1,5 @@
+{
+  "name": "LLM Hardware Matcher",
+  "description": "A tool to help you choose the right open-source LLM from Ollama or Hugging Face based on your hardware specifications (RAM, VRAM, CPU, GPU, Apple Silicon) and intended usage (coding, writing, role play). You can filter a list of models and compare them side-by-side to find the perfect fit for your setup.",
+  "requestFramePermissions": []
+}
