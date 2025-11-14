@@ -8,16 +8,18 @@ import { Model, Filters } from './types';
 
 export type SortOrder = 'performance' | 'quality' | 'speed' | 'name-asc' | 'name-desc';
 
+const initialFilters: Filters = {
+  search: '',
+  ram: 128,
+  vram: 80,
+  cpu: 'any',
+  gpu: 'any',
+  appleSilicon: false,
+  source: 'any',
+};
+
 const App: React.FC = () => {
-  const [filters, setFilters] = useState<Filters>({
-    search: '',
-    ram: 64,
-    vram: 48,
-    cpu: 'any',
-    gpu: 'any',
-    appleSilicon: false,
-    source: 'any',
-  });
+  const [filters, setFilters] = useState<Filters>(initialFilters);
 
   const [sortOrder, setSortOrder] = useState<SortOrder>('performance');
   const [modelsToCompare, setModelsToCompare] = useState<string[]>([]);
@@ -25,6 +27,10 @@ const App: React.FC = () => {
 
   const handleFilterChange = (newFilters: Filters) => {
     setFilters(newFilters);
+  };
+
+  const handleResetFilters = () => {
+    setFilters(initialFilters);
   };
 
   const handleSortChange = (order: SortOrder) => {
@@ -107,7 +113,11 @@ const App: React.FC = () => {
       <main className="container mx-auto px-4 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
           <div className="lg:col-span-1">
-            <FilterPanel filters={filters} onFilterChange={handleFilterChange} />
+            <FilterPanel 
+              filters={filters} 
+              onFilterChange={handleFilterChange} 
+              onResetFilters={handleResetFilters}
+            />
           </div>
           <div className="lg:col-span-3">
             <ModelList 

@@ -8,9 +8,10 @@ import AppleIcon from './icons/AppleIcon';
 interface FilterPanelProps {
   filters: Filters;
   onFilterChange: (newFilters: Filters) => void;
+  onResetFilters: () => void;
 }
 
-const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFilterChange }) => {
+const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFilterChange, onResetFilters }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -69,7 +70,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFilterChange }) =>
                             id="ram"
                             name="ram"
                             min="4"
-                            max="64"
+                            max="128"
                             step="4"
                             value={filters.ram}
                             onChange={handleInputChange}
@@ -86,7 +87,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFilterChange }) =>
                             id="vram"
                             name="vram"
                             min="2"
-                            max="48"
+                            max="80"
                             step="2"
                             value={filters.vram}
                             onChange={handleInputChange}
@@ -163,7 +164,19 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFilterChange }) =>
                     </div>
                  </div>
             </FilterGroup>
+        </div>
 
+        <div className="mt-6 pt-6 border-t border-slate-700">
+            <button
+                onClick={onResetFilters}
+                className="w-full flex items-center justify-center gap-2 text-center bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
+                aria-label="Clear all filters"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Clear All Filters
+            </button>
         </div>
     </div>
   );
